@@ -1,41 +1,58 @@
 import goblin from "../img/goblin.png";
 
-let clickCounter = 0;
-function placeGoblin() {
-  const cells = document.querySelectorAll(".cell");
-  const randomIndex = Math.floor(Math.random() * cells.length);
-  const gifCell = cells[randomIndex];
+class Game {
+  constructor() {
+    this.clickCounter = 0;
+    this.lastPlacedCell = null;
+    this.intervalId = null;
+  }
 
-  if (gifCell) {
-    const gif = document.createElement("img");
-    gif.src = goblin;
-    gif.alt = "Goblin";
-    gifCell.appendChild(gif);
+  placeGoblin() {
+    const cells = document.querySelectorAll(".cell");
+    const randomIndex = Math.floor(Math.random() * cells.length);
+    const pngCell = cells[randomIndex];
 
-    gif.addEventListener("click", () => {
-      gif.remove();
+    if (pngCell && pngCell !== this.lastPlacedCell) {
+      this.lastPlacedCell = pngCell;
+      const png = document.createElement("img");
+      png.src = goblin;
+      png.alt = "Goblin";
+      png.classList.add("goblin");
+      pngCell.appendChild(png);
 
-      clickCounter++;
-      const clickCounterElement = document.querySelector(".click-counter");
-      clickCounterElement.textContent = clickCounter;
-    });
+      png.addEventListener("click", () => {
+        png.remove();
 
-    setTimeout(() => {
-      gif.remove();
-    }, 1000);
+        this.clickCounter++;
+        const clickCounterElement = document.querySelector(".click-counter");
+        clickCounterElement.textContent = this.clickCounter;
+      });
+
+      setTimeout(() => {
+        png.remove();
+      }, 1000);
+    }
+  }
+
+  start() {
+    this.intervalId = setInterval(() => this.placeGoblin(), 1000);
+  }
+
+  stop() {
+    clearInterval(this.intervalId);
+    this.intervalId = null;
   }
 }
 
-let intervalId = null;
+const game = new Game();
 
-function start() {
-  intervalId = setInterval(placeGoblin, 1000);
-}
+document.addEventListener("DOMContentLoaded", () => {
+  const startButton = document.querySelector(".start");
+  const stopButton = document.querySelector(".stop");
+  const game = new Game();
 
-function stop() {
-  clearInterval(intervalId);
-  intervalId = null;
-}
+  startButton.addEventListener("click", () => game.start());
+  stopButton.addEventListener("click", () => game.stop());
+});
 
-window.start = start;
-window.stop = stop;
+export default game;
