@@ -1,6 +1,6 @@
 # Webpack5
 
-[![Build status](https://ci.appveyor.com/api/github/webhook?id=mudr6pa7wmji84dx)](https://ci.appveyor.com/project/Jekarobot/dom)
+![CI](https://github.com/Jekarobot/dom/actions/workflows/web.yml/badge.svg)
 
 
 [Руководство по настройке Webpack](https://webpack.js.org/guides/)
