@@ -1,0 +1,1 @@
+body{align-items:center;display:flex;flex-direction:column;height:100vh;justify-content:center;margin:0}.game-field{display:flex;gap:10px}.cell{background-color:#bdb76b;border:1px solid #000;height:120px;width:120px}.cell,.start{margin-bottom:10px}.start{margin-top:10px}
