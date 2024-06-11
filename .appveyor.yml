@@ -1,28 +1,31 @@
-image: Ubuntu2204  # образ для сборки
+version: 1.0.{build}
 
-stack: node 20  # окружение
+# Используем образ
+image: Ubuntu
 
-branches:
-  only:
-    - master  # ветка git
-    - main
-
-cache: node_modules  # кеширование
+# Установка Node.js
+environment:
+  nodejs_version: "20.14.0"
 
 install:
-  - yarn  # команда установки зависимостей
+  - ps: Install-Product node $env:nodejs_version
+  - node --version
+  - npm --version
+  - npm install -g yarn
 
-build: off  # отключаем встроенную в appveyor систему сборки
-
+# Установка зависимостей
 build_script:
-  - yarn build   # команда сборки
+  - yarn
+  - yarn build
 
+# Линтинг и тестирование
 test_script:
-  - yarn lint && yarn test  # скрипт тестирования
+  - yarn lint
+  - yarn test
 
-deploy_script:  # скрипт развёртывания
-  - git config --global credential.helper store
-  - git config --global user.name AppVeyor
-  - git config --global user.email ci@appveyor.com
-  - echo "https://$GITHUB_TOKEN:x-oauth-basic@github.com" > "$HOME/.git-credentials"
+# Деплой
+deploy_script:
+  - git config --global user.name "AppVeyor"
+  - git config --global user.email "ci@appveyor.com"
+  - git remote set-url origin https://$GITHUB_TOKEN:x-oauth-basic@github.com/Jekarobot/dom.git
   - npx gh-pages -d dist -u "appveyor-bot <ci@appveyor>"
