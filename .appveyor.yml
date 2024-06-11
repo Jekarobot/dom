@@ -1,14 +1,17 @@
 version: 1.0.{build}
 
-# Используем образ
 image: Ubuntu
 
-# Установка Node.js
 environment:
   nodejs_version: "20.14.0"
 
+# Установка nvm и Node.js
 install:
-  - ps: Install-Product node $env:nodejs_version
+  - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+  - export NVM_DIR="$HOME/.nvm"
+  - [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  - nvm install $nodejs_version
+  - nvm use $nodejs_version
   - node --version
   - npm --version
   - npm install -g yarn
