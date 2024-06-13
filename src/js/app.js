@@ -5,12 +5,10 @@ class Game {
     this.clickCounter = 0;
     this.lastPlacedCell = null;
     this.intervalId = null;
-    this.createGameField();
   }
 
   createGameField() {
     const container = document.querySelector(".game-field");
-
     for (let i = 0; i < 4; i++) {
       const row = document.createElement("div");
       row.className = "row";
@@ -60,9 +58,9 @@ class Game {
   }
 }
 
-const game = new Game();
-
 document.addEventListener("DOMContentLoaded", () => {
+  const game = new Game();
+  game.createGameField(); // Явно вызываем создание игрового поля
   const startButton = document.querySelector(".start");
   const stopButton = document.querySelector(".stop");
 
@@ -70,4 +68,4 @@ document.addEventListener("DOMContentLoaded", () => {
   stopButton.addEventListener("click", () => game.stop());
 });
 
-export default game;
+export default Game;

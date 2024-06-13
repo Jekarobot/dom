@@ -1,18 +1,18 @@
-import game from "./app.js";
+import Game from "./app.js";
 
 jest.mock("../img/goblin.png", () => "mocked-goblin.png");
 
 describe("Goblin Game", () => {
+  let game;
+
   beforeEach(() => {
     jest.useFakeTimers();
     document.body.innerHTML = `
-      <div class="cells">
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-      </div>
+      <div class="game-field"></div>
       <div class="click-counter"></div>
     `;
+    game = new Game();
+    game.createGameField(); // Явно вызываем создание игрового поля
   });
 
   afterEach(() => {
@@ -56,6 +56,7 @@ describe("Goblin Game", () => {
   });
 
   test("stop should stop placing goblins", () => {
+    jest.spyOn(game, "placeGoblin");
     game.start();
     jest.advanceTimersByTime(2000);
     game.stop();
