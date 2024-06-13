@@ -5,6 +5,22 @@ class Game {
     this.clickCounter = 0;
     this.lastPlacedCell = null;
     this.intervalId = null;
+    this.createGameField();
+  }
+
+  createGameField() {
+    const container = document.querySelector(".game-field");
+
+    for (let i = 0; i < 4; i++) {
+      const row = document.createElement("div");
+      row.className = "row";
+      for (let j = 0; j < 4; j++) {
+        const cell = document.createElement("div");
+        cell.className = "cell";
+        row.appendChild(cell);
+      }
+      container.appendChild(row);
+    }
   }
 
   placeGoblin() {
@@ -49,7 +65,6 @@ const game = new Game();
 document.addEventListener("DOMContentLoaded", () => {
   const startButton = document.querySelector(".start");
   const stopButton = document.querySelector(".stop");
-  const game = new Game();
 
   startButton.addEventListener("click", () => game.start());
   stopButton.addEventListener("click", () => game.stop());
