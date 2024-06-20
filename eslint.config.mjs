@@ -12,7 +12,9 @@ export default [
   {
     rules: {
       "no-unused-vars": "warn",
+      "linebreak-style": "off",
       "prettier/prettier": ["error", { endOfLine: "auto" }],
+      indent: "off",
     },
   },
   {

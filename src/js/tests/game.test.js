@@ -1,6 +1,6 @@
-import Game from "./app.js";
+import Game from "../modules/game.js";
 
-jest.mock("../img/goblin.png", () => "mocked-goblin.png");
+jest.mock("../../img/goblin.png", () => "mocked-goblin.png");
 
 describe("Goblin Game", () => {
   let game;
