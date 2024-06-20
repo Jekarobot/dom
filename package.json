@@ -44,5 +44,8 @@
   "jest": {
     "testEnvironment": "jsdom"
   },
-  "repository": "https://github.com/Jekarobot/dom.git"
+  "repository": "https://github.com/Jekarobot/dom.git",
+  "dependencies": {
+    "url-loader": "^4.1.1"
+  }
 }
