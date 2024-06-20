@@ -10,7 +10,7 @@ body {
 .game-field {
   display: flex;
   gap: 10px;
-  cursor: url("../img/hammer.png") 16 16, auto;
+  cursor: url(../img/hammer.png) 16 16, auto;
 }
 
 .cell {
